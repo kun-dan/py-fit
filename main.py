@@ -49,7 +49,9 @@ def signup():
             print("║               20 characters                 ║")
             print("╚═════════════════════════════════════════════╝")
             continue
+        
         break
+    
 
     while True:
         time.sleep(0.18)
