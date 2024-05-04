@@ -5,6 +5,8 @@ import time
 from datetime import date, timedelta
 from tabulate import tabulate
 import matplotlib.pyplot as plt
+from os import get_terminal_size
+
 
 
 
@@ -16,6 +18,7 @@ con = mycon.connect(
 
 if con.is_connected():
     print("[LOGS] : Database Connected")
+    
 
 cur = con.cursor()
 
@@ -23,11 +26,41 @@ def signup():
     global username                                                     # This will be the global username
     global doj                                                          # This will be the join date
     while True:
-        with open("data.csv", "r+") as file:
+        print("╔═════════════════════════════════════════════╗")
+        print("║         Enter your desired username:        ║")
+        print("╚═════════════════════════════════════════════╝")
+        username = input("INPUT:")
+        with open("data.csv", "r") as file:
+            read = csv.reader(file)
+            user_row = list(read)
+            items = [row[0] for row in user_row]
+
+        if username in items:
+            time.sleep(0.18)
             print("╔═════════════════════════════════════════════╗")
-            print("║         Enter your desired username:        ║")
+            print("║           Username already exists.          ║")
             print("╚═════════════════════════════════════════════╝")
-            username = input("INPUT:")
+            continue
+        
+        if len(username) > 20:
+            time.sleep(0.18)
+            print("╔═════════════════════════════════════════════╗")
+            print("║         Username should be of max.          ║")
+            print("║               20 characters                 ║")
+            print("╚═════════════════════════════════════════════╝")
+            continue
+        break
+
+    while True:
+        time.sleep(0.18)
+        print("╔═══════════════════════════════════════╗")
+        print("║        Enter a valid password:        ║")
+        print("╚═══════════════════════════════════════╝")
+
+
+
+
+
             # Code in Progress
             
             
@@ -56,7 +89,6 @@ def welcome():
         print("║       2. Log In to an Existing Account      ║")
         print("║              3. Exit the App                ║")
         print("╚═════════════════════════════════════════════╝")
-
 
 
         choice = input("Enter Your Choice: ")
