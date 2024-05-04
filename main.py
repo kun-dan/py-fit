@@ -5,10 +5,7 @@ import time
 from datetime import date, timedelta
 from tabulate import tabulate
 import matplotlib.pyplot as plt
-from os import get_terminal_size
-
-
-
+import os
 
 con = mycon.connect(
     host="localhost",
@@ -22,13 +19,25 @@ if con.is_connected():
 
 cur = con.cursor()
 
+def printbw(content):
+    terminal_width = os.get_terminal_size().columns
+    content_width = len(content)
+
+    if content_width >= terminal_width:
+        print(content)
+    else:
+        padding_width = (terminal_width - content_width) // 2
+        padding = " " * padding_width
+        print(padding + content + padding)
+
+
 def signup():
     global username                                                     # This will be the global username
     global doj                                                          # This will be the join date
     while True:
-        print("╔═════════════════════════════════════════════╗")
-        print("║         Enter your desired username:        ║")
-        print("╚═════════════════════════════════════════════╝")
+        printbw("╔═════════════════════════════════════════════╗")
+        printbw("║         Enter your desired username:        ║")
+        printbw("╚═════════════════════════════════════════════╝")
         username = input("INPUT:")
         with open("data.csv", "r") as file:
             read = csv.reader(file)
@@ -64,38 +73,31 @@ def signup():
 
 
             # Code in Progress
-            
-            
-        
-        
-
-    
 
 def welcome():
     while True:
-        print("╔════════════════════════════════════════════╗")
-        print(r"║     ______  __            ________________ ║")
-        print(r"║    / __ \ \/ /           / ____/  _/_  __/ ║")
-        print(r"║   / /_/ /\  /  ______   / /_   / /  / /    ║")
-        print(r"║  / ____/ / /  /_____/  / __/ _/ /  / /     ║")
-        print(r"║ /_/     /_/           /_/   /___/ /_/      ║")
-        print(r"║                                            ║")
-        print(r"╚════════════════════════════════════════════╝")
+        printbw("╔════════════════════════════════════════════╗")
+        printbw(r"║     ______  __            ________________ ║")
+        printbw(r"║    / __ \ \/ /           / ____/  _/_  __/ ║")
+        printbw(r"║   / /_/ /\  /  ______   / /_   / /  / /    ║")
+        printbw(r"║  / ____/ / /  /_____/  / __/ _/ /  / /     ║")
+        printbw(r"║ /_/     /_/           /_/   /___/ /_/      ║")
+        printbw(r"║                                            ║")
+        printbw(r"╚════════════════════════════════════════════╝")
         time.sleep(0.2)
-        print("╔═════════════════════════════════════════════╗")
-        print("║  Welcome! What Would You Like to do Today   ║")
-        print("╚═════════════════════════════════════════════╝")
+        printbw("╔═════════════════════════════════════════════╗")
+        printbw("║  Welcome! What Would You Like to do Today   ║")
+        printbw("╚═════════════════════════════════════════════╝")
         time.sleep(0.2)
-        print("╔═════════════════════════════════════════════╗")
-        print("║            1. Create an Account             ║")
-        print("║       2. Log In to an Existing Account      ║")
-        print("║              3. Exit the App                ║")
-        print("╚═════════════════════════════════════════════╝")
+        printbw("╔═════════════════════════════════════════════╗")
+        printbw("║            1. Create an Account             ║")
+        printbw("║       2. Log In to an Existing Account      ║")
+        printbw("║              3. Exit the App                ║")
+        printbw("╚═════════════════════════════════════════════╝")
 
 
         choice = input("Enter Your Choice: ")
         if choice == "1":
-
             return
         elif choice == "2":
             return
@@ -118,8 +120,6 @@ def welcome():
             print("║ Invalid input. Please choose a number ║")
             print("║             from 1 to 3.              ║")
             print("╚═══════════════════════════════════════╝")
-
-
 
 
 welcome()
