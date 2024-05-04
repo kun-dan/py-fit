@@ -5,7 +5,7 @@ import time
 from datetime import date, timedelta
 from tabulate import tabulate
 import matplotlib.pyplot as plt
-import os
+
 
 con = mycon.connect(
     host="localhost",
@@ -19,16 +19,6 @@ if con.is_connected():
 
 cur = con.cursor()
 
-def printbw(content):
-    terminal_width = os.get_terminal_size().columns
-    content_width = len(content)
-
-    if content_width >= terminal_width:
-        print(content)
-    else:
-        padding_width = (terminal_width - content_width) // 2
-        padding = " " * padding_width
-        print(padding + content + padding)
 
 
 def signup():
